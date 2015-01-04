@@ -1,11 +1,18 @@
-before_install: 
+before_install:
+  - git fetch origin master:master
+  - git fetch origin v2.0.0:v2.0.0
+  - git fetch origin test/attributes:test/attributes
+  - git fetch origin test/master:test/master
   - sudo apt-get install libicu-dev -y
-  - gem update --system 2.1.11
+  - git submodule init
+  - git submodule sync --quiet
+  - script/fast-submodule-update
 rvm:
-  - 1.8.7
-  - 1.9.2
   - 1.9.3
   - 2.0.0
-  - ree
+  - 2.1
+  - 2.2
 notifications:
   disabled: true
+git:
+  submodules: false
